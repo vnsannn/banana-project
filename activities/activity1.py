@@ -12,7 +12,7 @@ def child_task(task_id):
     time.sleep(1)
     print(f"Child {task_id} finished.")
 
-if __name__ == "__main__":
+def run():
     print(f"Parent PID = {os.getpid()}")
 
     processes = []
@@ -22,4 +22,15 @@ if __name__ == "__main__":
     # TODO 2: Start each process
     # TODO 3: Use .join() on each process (this is the "wait" step)
 
+    for i in range(1, 4):
+        process = multiprocessing.Process(target = child_task,args = (i,))
+        processes.append(process)
+        process.start()
+
+    for process in processes:
+        process.join()
+
     print("All child processes terminated.")
+
+if __name__ == "__main__":
+    run()
