@@ -43,3 +43,16 @@ def consumer():
         time.sleep(random.uniform(0.1, 0.5))
 
 # TODO: Create and start a producer thread and a consumer thread, then join both.
+
+def run():
+    p_thread = threading.Thread(target = producer)
+    c_thread = threading.Thread(target = consumer)
+
+    p_thread.start()
+    c_thread.start()
+
+    p_thread.join()
+    c_thread.join()
+
+if __name__ == "__main__":
+    run()
